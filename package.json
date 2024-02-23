@@ -6,9 +6,10 @@
     "npm": "9.5.1"
   },
   "description": "A food tracking API",
-  "main": "index.js",
+  "main": "./src/server.js",
   "scripts": {
     "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
     "test": "echo testing testing 1, 2, 3"
   },
   "repository": {
@@ -20,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/dmp6511/FoodTrackerAPI/issues"
   },
-  "homepage": "https://github.com/dmp6511/FoodTrackerAPI#readme"
+  "homepage": "https://github.com/dmp6511/FoodTrackerAPI#readme",
+  "dependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.29.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
 }
