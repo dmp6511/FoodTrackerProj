@@ -1,0 +1,24 @@
+{
+  "name": "foodtrackerapi",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.16.1",
+    "npm": "9.5.1"
+  },
+  "description": "A food tracking API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "test": "echo testing testing 1, 2, 3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmp6511/FoodTrackerAPI"
+  },
+  "author": "De'Andre Perry",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/dmp6511/FoodTrackerAPI/issues"
+  },
+  "homepage": "https://github.com/dmp6511/FoodTrackerAPI#readme"
+}
