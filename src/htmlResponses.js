@@ -2,8 +2,8 @@
 const fs = require('fs');
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
-const page2 = fs.readFileSync9(`${__dirname}/../client/client2.html`);
-const css = fs.readFileSync9(`${__dirname}/../client/style.css`);
+const page2 = fs.readFileSync(`${__dirname}/../client/client2.html`);
+const css = fs.readFileSync(`${__dirname}/../client/style.css`);
 
 
 
