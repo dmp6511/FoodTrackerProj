@@ -4,11 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/client/style.css">
     <title>Food Tracker API</title>
 </head>
 
 <body>
-    <h1>Food Tracking API </h1>
+    <section>
+        <h1>Food Tracking API </h1>
+        <h2>IGME 430 Project 1</h2>
+        <p>An API for tracking your daily meals</p>
+    </section>
+    <!-- building the form for the index page -->
+    <section id="formBtn">
+        <form action="/createProfile">
+            <button id="createProfileBtn">
+                <label for="Create Profile"> Create a new Profile! </label>
+            </button>
+        </form>
+    </section>
+
+    <section id="viewLogBtn">
+        <label for="personSearch">View Log for</label>
+        <br>
+        <input type="text" name="person" id="personSearch">
+        <button id="searchBtn">View Log</button>
+    </section>
 </body>
 
 </html>

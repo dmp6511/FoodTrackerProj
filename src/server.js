@@ -8,6 +8,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const onRequest = (request, response) => {
     console.log(request);
+    const parsedURL = url.parse(request.url);
 }
 
 
