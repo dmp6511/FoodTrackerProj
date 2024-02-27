@@ -4,11 +4,31 @@ const url = require('url');
 const query = require('querystring');
 
 
+// Handlers
+const jsonHandler = require('./jsonResponses');
+const htmlHandler = require('./htmlResponses');
+
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
+
+// GET handler function
+const handleGet = (request, response, parsedURL) => {
+
+    // path routes
+    if (parsedURL.pathname === '/style.css') {
+        htmlHandler.getCSS(request, response);
+    } else if (parsedURL.pathname === '/page2') {
+        htmlHandler.getPage2(request, response);
+    } else {
+        htmlHandler.getIndex(request, response);
+    }
+};
 
 const onRequest = (request, response) => {
     console.log(request);
     const parsedURL = url.parse(request.url);
+
+    // checking the method of the request
+    handleGet(request, response, parsedURL);
 }
 
 
