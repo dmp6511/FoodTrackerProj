@@ -14,20 +14,54 @@
         <h2>IGME 430 Project 1</h2>
         <p>An API for tracking your daily meals</p>
     </section>
+
+
+
     <!-- building the form for the index page -->
     <section id="formBtn">
+        <!-- basic values for the user -->
         <form action="/createProfile">
+            <h3>Create a Profile</h3>
+            <input type="text" name="firstName" id="firstName" placeholder="First Name">
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+            <input type="number" name="age" id="ageField" min="0" max="100" step="1" placeholder="Age">
+            <input type="text" name="height" id="heightField" placeholder="Height" maxlength="5">
+            <input type="number" name="weight" id="wightField" maxlength="3" placeholder="Weight">
+            <select name="diet" id="dietSelect">
+                <option value="Diet" selected> Prefered Diet</option>
+                <option value="Carnivore">Carnivore</option>
+                <option value="Vegitarian">Vegitarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Pescatarian">Pescatarian</option>
+            </select>
             <button id="createProfileBtn">
                 <label for="Create Profile"> Create a new Profile! </label>
             </button>
         </form>
     </section>
 
+
+    <section id="logMeal">
+        <form action="">
+            <h3>Log a Meal</h3>
+
+        </form>
+    </section>
+
+
     <section id="viewLogBtn">
-        <label for="personSearch">View Log for</label>
-        <br>
-        <input type="text" name="person" id="personSearch">
-        <button id="searchBtn">View Log</button>
+        <form action="/getUser">
+            <h3>Search Logs</h3>
+            <label for="personSearch">View Logs for</label>
+            <br>
+            <input type="text" name="person" id="personSearch">
+            <input type="submit" value="Search for Log">
+        </form>
+    </section>
+
+    <!-- content section -->
+    <section id="content">
+
     </section>
 </body>
 

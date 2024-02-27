@@ -1,2 +1,27 @@
 /* styles galore */
 
+body {
+    height: 100%;
+    width: 100%;
+    font-size: larger;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+/* content */
+h1, h2 {
+    text-align: center;
+}
+
+
+form {
+    width: 500px;
+    height: 200px;
+    flex-direction: row;
+    background-color: beige;
+    padding: 5px;
+}
+
+button {
+    font-size: 20px;
+}
