@@ -4,8 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type = "text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Food Tracker API</title>
+    <script>
+        const handleResponse = async (response) => {
+
+            // switch statement for status codes
+            switch (response.status) {
+                case 200:
+                    content.innerHTML = `<b> Success! </b>`;
+                    break;
+                case 201:
+                    content.innerHTML = `<b> Created! </b>`;
+                    break;
+                case 204:
+                    content.innerHTML = `<b> Updated! </b>`;
+                    break;
+                case 400:
+                    content.innerHTML = `<b> Bad Request! </b>`;
+                    break;
+                case 404:
+                    content.innerHTML = `<b> Not Found! </b>`;
+                    break;
+                case 500:
+                    content.innerHTML = `<b> Server Error! </b>`;
+                    break;
+                default:
+                    content.innerHTML = `<b> Unknown Error! </b>`;
+                    break;
+            }
+
+
+            // if the response is 200, then we can parse the JSON
+            let obj = await response.json();
+
+            if (obj.message) {
+                content.innerHTML += `<p>${obj.message}</p>`;
+            };
+        }
+    </script>
 </head>
 
 <body>
@@ -20,13 +57,13 @@
     <!-- building the form for the index page -->
     <section id="formBtn">
         <!-- basic values for the user -->
-        <form action="/createProfile">
+        <form action="/createProfile" id="profForm" method="post">
             <h3>Create a Profile</h3>
             <input type="text" name="firstName" id="firstName" placeholder="First Name">
             <input type="text" name="lastName" id="lastName" placeholder="Last Name">
             <input type="number" name="age" id="ageField" min="0" max="100" step="1" placeholder="Age">
             <input type="text" name="height" id="heightField" placeholder="Height" maxlength="5">
-            <input type="number" name="weight" id="wightField" maxlength="3" placeholder="Weight">
+            <input type="number" name="weight" id="weightField" min="0" max="999" step="1" placeholder="Weight">
             <select name="diet" id="dietSelect">
                 <option value="Diet" selected> Prefered Diet: </option>
                 <option value="Carnivore">Carnivore</option>
@@ -40,13 +77,15 @@
                 <label for="Create Profile"> Create a new Profile! </label>
             </button>
         </form>
+        <!-- area for status code -->
+        <section id="profContent"></section>
     </section>
 
 
     <!-- Logging a Meal -->
 
     <section id="logMeal">
-        <form action="">
+        <form action="/logMeal">
             <h3>Log a Meal</h3>
             <input type="text" name="dishName" id="dishName" placeholder="Dish Name:">
             <input type="date" name="date" id="dateField">
@@ -54,7 +93,7 @@
                 placeholder="Enter a description of your dish..."></textarea>
             <input type="number" name="calCount" id="calCount" placeholder="Calories" maxlength="5">
             <select name="mealTime" id="mealTime">
-                <option value="Meal Time">Meal Time: </option>
+                <option value="Meal Time" selected>Meal Time: </option>
                 <option value="Breakfast">Breakfast</option>
                 <option value="Brunch">Brunch</option>
                 <option value="Lunch">Lunch</option>

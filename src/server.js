@@ -10,6 +10,33 @@ const htmlHandler = require('./htmlResponses');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
+// parsing the body text
+const parseBody = (request, response, handler) => {
+    const body = [];
+
+    request.on('error', (err) => {
+        console.dir(err);
+        response.statusCode = 400;
+        response.end();
+    })
+
+
+    // used whenever we get a 'chunk' of data
+    request.on('data', (chunk) => {
+        body.push(chunk); // will push the chunks together in received order
+    });
+
+    // turns the body array into a string when the request is finished
+    request.on('end', () => {
+        const bodyString = Buffer.concat(body).toString();
+        const bodyParams = query.parse(bodyString);
+
+        handler(request, response, bodyParams);
+    });
+};
+
+
+
 // GET handler function
 const handleGet = (request, response, parsedURL) => {
 

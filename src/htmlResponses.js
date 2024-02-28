@@ -14,13 +14,13 @@ const getIndex = (request, response) => {
 };
 
 const getPage2 = (request, response) => {
-    response.writeHead(200, { 'Content-type': 'text/html' });
+    response.writeHead(200, { 'Content-Type': 'text/html' });
     response.write(page2);
     response.end();
 }
 
 const getCSS = (request, response) => {
-    response.writeHead(200, { 'Content-Type': 'style/css' });
+    response.writeHead(200, { 'Content-Type': 'text/css' });
     response.write(css);
     response.end();
 }
