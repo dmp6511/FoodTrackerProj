@@ -18,7 +18,7 @@ const parseBody = (request, response, handler) => {
         console.dir(err);
         response.statusCode = 400;
         response.end();
-    })
+    });
 
 
     // used whenever we get a 'chunk' of data
@@ -35,7 +35,12 @@ const parseBody = (request, response, handler) => {
     });
 };
 
-
+// handle POST requests
+const handlePost = (request, response, pasrshedURL) => {
+    if (parsedURL.pathname === ' /createProfile') {
+        parseBody(request, response, jsonHandler.createProfile);
+    };
+};
 
 // GET handler function
 const handleGet = (request, response, parsedURL) => {
@@ -55,10 +60,14 @@ const onRequest = (request, response) => {
     const parsedURL = url.parse(request.url);
 
     // checking the method of the request
-    handleGet(request, response, parsedURL);
-}
+    if (request.method === 'POST') {
+        handlePost(request, response, parsedURL);
+    } else {
+        handleGet(request, response, parsedURL);
+    }
+};
 
 
 http.createServer(onRequest).listen(port, () => {
     console.log(`Listening on 127.0.01:${port}`);
-})
+});

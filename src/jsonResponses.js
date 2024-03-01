@@ -53,5 +53,26 @@ const createProfile = (request, response, body) => {
             responseJSON.message = `Profile for ${users[body.firstName]} has created successfully.`;
             return respondJSON(request, response, responseCode, responseJSON);
         }
-    }
+    };
+};
+
+
+
+
+// not found
+const notFound = (request, response) => {
+    const responseJSON = {
+        message: 'The page you are looking for was not found.',
+        id: 'notFound',
+    };
+
+    return respondJSON(request, response, 404, responseJSON);
+};
+
+
+// exporting the functions
+module.exports = {
+    getUsers,
+    createProfile,
+    notFound,
 };

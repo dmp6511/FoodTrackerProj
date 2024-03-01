@@ -39,9 +39,55 @@
             let obj = await response.json();
 
             if (obj.message) {
-                content.innerHTML += `<p>${obj.message}</p>`;
+                content.innerHTML += `<p>${obj.message}</p>`; // display a message if there is one.
             };
+        };
+
+        // sending a POST Request
+        const sendPost = async (profile) => {
+            const profileAction = profile.getAttribute("action");
+            const profileMethod = profile.getAttribute("method");
+
+            // grabbing the values from the form
+            const firstNameField = document.querySelector("#firstName");
+            const lastNameField = document.querySelector("#lastName");
+            const ageField = document.querySelector("#ageField");
+            const heightField = document.querySelector("#heightField");
+            const weightField = document.querySelector("#weightField");
+            const dietSelect = document.querySelector("#dietSelect");
+
+
+            // creating the url encoded form data
+            const formData = `firstName=${firstNameField.value}&lastName=${lastNameField.value}&age=${ageField.value}&height=${heightField.value}&weight=${weightField.value}&diet=${dietSelect.value}`;
+
+
+            // fetch request
+            const response = await fetch(profileAction, {
+                method: profileMethod,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: formData
+            });
+
+            // handle the response
+            handleResponse(response);
         }
+
+        // init function
+        const init = () => {
+
+            const addProfile = (e) => {
+                e.preventDefault();
+                sendPost(e.target);
+                return false;
+            };
+
+            // event listener for the form
+            profile.addEventListener("submit", addProfile);
+        }
+
+        window.onload = init;
     </script>
 </head>
 
