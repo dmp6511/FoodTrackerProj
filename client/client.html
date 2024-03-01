@@ -121,10 +121,26 @@
             </select>
 
             <input type="submit" value="Create a new Profile!" />
+            <!-- area for status code -->
+            <section id="content"></section>
         </form>
-        <!-- area for status code -->
-        <section id="content"></section>
     </section>
+
+    <br>
+
+<!-- searching for Logs -->
+    <section id="viewLogBtn">
+        <form action="/getUser">
+            <h3>Search Logs</h3>
+            <label for="personSearch">View Logs for</label>
+            <br>
+            <input type="text" name="firstNameSearch" id="firstNameSearch" placeholder="First Name">
+            <input type="text" name="lastNameSearch" id="lastNameSearch" placeholder="Last Name">
+            <input type="submit" value="Search for Logs">
+        </form>
+    </section>
+
+
 
 
     <!-- link to second page -->

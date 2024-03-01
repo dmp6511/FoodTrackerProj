@@ -54,11 +54,20 @@ const createProfile = (request, response, body) => {
 
 
     if (responseCode === 201) {
-        responseJSON.message = `Profile for ${users[body.firstName].firstName + users[body.firstName].lastName} has created successfully.`;
+        responseJSON.message = `Profile for '${users[body.firstName].firstName + " " + users[body.firstName].lastName}' has been created successfully.`;
         return respondJSON(request, response, responseCode, responseJSON);
     }
 };
 
+
+// logging a meal
+const logMeal = (request, response, body) => {
+    const responseJSON = {
+        message: 'One or more fields are empty. Please fill out all fields.',
+    };
+
+
+}
 
 
 
