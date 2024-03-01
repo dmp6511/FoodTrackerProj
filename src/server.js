@@ -50,8 +50,10 @@ const handleGet = (request, response, parsedURL) => {
         htmlHandler.getCSS(request, response);
     } else if (parsedURL.pathname === '/getUsers') {
         jsonHandler.getUsers(request, response);
-    } else if (parsedURL.pathname === '/logMeal' || parsedURL.pathname === '/viewLogs') {
+    } else if (parsedURL.pathname === '/logMeal') {
         htmlHandler.getPage2(request, response);
+    } else if (parsedURL.pathname === '/viewLogs') {
+        jsonHandler.viewLogs(request, response);
     } else if (parsedURL.pathname === '/notFound') {
         jsonHandler.notFound(request, response);
     } else {

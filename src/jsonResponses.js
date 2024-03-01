@@ -51,6 +51,7 @@ const createProfile = (request, response, body) => {
     users[body.firstName].weight = body.weight;
     users[body.firstName].height = body.height;
     users[body.firstName].createdAt = Date.now();
+    users[body.firstName].logs = {};
 
 
     if (responseCode === 201) {
@@ -60,15 +61,15 @@ const createProfile = (request, response, body) => {
 };
 
 
-// logging a meal
-const logMeal = (request, response, body) => {
+
+// view logs
+const viewLogs = (request, response) => {
     const responseJSON = {
-        message: 'One or more fields are empty. Please fill out all fields.',
+        message: 'No logs found... for now.',
     };
 
-
-}
-
+    return respondJSON(request, response, 200, responseJSON);
+};
 
 
 // not found
@@ -87,4 +88,5 @@ module.exports = {
     getUsers,
     createProfile,
     notFound,
+    viewLogs,
 };
