@@ -36,10 +36,10 @@ const parseBody = (request, response, handler) => {
 };
 
 // handle POST requests
-const handlePost = (request, response, pasrshedURL) => {
-    if (parsedURL.pathname === ' /createProfile') {
+const handlePost = (request, response, parsedURL) => {
+    if (parsedURL.pathname === '/createProfile') {
         parseBody(request, response, jsonHandler.createProfile);
-    };
+    }
 };
 
 // GET handler function
@@ -48,8 +48,12 @@ const handleGet = (request, response, parsedURL) => {
     // path routes
     if (parsedURL.pathname === '/style.css') {
         htmlHandler.getCSS(request, response);
+    } else if (parsedURL.pathname === '/getUsers') {
+        jsonHandler.getUsers(request, response);
     } else if (parsedURL.pathname === '/page2') {
         htmlHandler.getPage2(request, response);
+    } else if (parsedURL.pathname === '/notFound') {
+        jsonHandler.notFound(request, response);
     } else {
         htmlHandler.getIndex(request, response);
     }

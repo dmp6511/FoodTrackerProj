@@ -33,27 +33,30 @@ const createProfile = (request, response, body) => {
     if (!body.firstName || !body.lastName || !body.age || !body.diet || !body.weight || !body.height) {
         responseJSON.id = 'missingParams'; // error message
         return respondJSON(request, response, 400, responseJSON);
-    };
+    }
 
     let responseCode = 204; // Updated
 
     // create the user, if not existing
     if (!users[body.firstName]) {
         users[body.firstName] = {};
-        users[body.firstName].firstName = body.firstName;
-        users[body.firstName].lastName = body.lastName;
-        users[body.firstName].age = body.age;
-        users[body.firstName].diet = body.diet;
-        users[body.firstName].weight = body.weight;
-        users[body.firstName].height = body.height;
-        users[body.firstName].createdAt = Date.now();
         responseCode = 201; // Created
-
-        if (responseCode === 201) {
-            responseJSON.message = `Profile for ${users[body.firstName]} has created successfully.`;
-            return respondJSON(request, response, responseCode, responseJSON);
-        }
     };
+
+    // applying the user's data
+    users[body.firstName].firstName = body.firstName;
+    users[body.firstName].lastName = body.lastName;
+    users[body.firstName].age = body.age;
+    users[body.firstName].diet = body.diet;
+    users[body.firstName].weight = body.weight;
+    users[body.firstName].height = body.height;
+    users[body.firstName].createdAt = Date.now();
+
+
+    if (responseCode === 201) {
+        responseJSON.message = `Profile for ${users[body.firstName].firstName + users[body.firstName].lastName} has created successfully.`;
+        return respondJSON(request, response, responseCode, responseJSON);
+    }
 };
 
 
