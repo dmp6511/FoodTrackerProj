@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    <!-- content section -->
-    <section id="content">
-        <h2>This is page 2</h2>
+    <header>
+        <h2>The Logs</h2>
+        <p>Here you can log a meal or search for logs</p>
+    </header>
 
-            <!-- Logging a Meal -->
+    <!-- Logging a Meal -->
 
     <section id="logMeal">
-        <form action="/logMeal" >
+        <form action="/logMeal">
             <h3>Log a Meal</h3>
             <input type="text" name="dishName" id="dishName" placeholder="Dish Name:">
             <input type="date" name="date" id="dateField">
@@ -34,7 +35,7 @@
         </form>
     </section>
 
-
+<br>
     <section id="viewLogBtn">
         <form action="/getUser">
             <h3>Search Logs</h3>
@@ -46,9 +47,14 @@
         </form>
     </section>
 
+    <!-- content section -->
 
+
+    <footer>
         <a href="/client/client.html"> back to home </a>
-    </section>
+    </footer>
+
+
 </body>
 
 </html>
