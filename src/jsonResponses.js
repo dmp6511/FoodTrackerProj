@@ -63,6 +63,26 @@ const createProfile = (request, response, body) => {
 
 // post a meal log
 const logMeal = (request, response, body) => {
+
+    const responseJSON = {
+        message: 'User not found.',
+    };
+
+    // Find the user in the users array
+    const userIndex = users.findIndex(user => user.firstName === body.firstName);
+
+    // If the user is found
+    if (userIndex !== -1) {
+        // Add the meal to the user's meals array
+        if (!users[userIndex].logs) {
+            users[userIndex].logs = [];
+        }
+        users[userIndex].logs.push(body.dishName + " " + body.mealTime + " " + body.date + " " + body.dishDesc + " " + body.calCount);
+
+        responseJSON.message = `Meal has been logged for ${body.firstName}.`;
+        return respondJSON(request, response, 200, responseJSON);
+    };
+
     const newMeal = {
         date: body.date,
         meal: body.dishName,
@@ -79,17 +99,7 @@ const logMeal = (request, response, body) => {
             id: 'missingParams',
         };
         return respondJSON(request, response, 400, responseJSON);
-    };
-
-
-    // send a message
-    newMeal.message = `Meal logged successfully.`;
-
-    // push the meal to the user's logs
-    users[body.firstName].logs.push(newMeal);
-
-    // return a 201
-    return respondJSON(request, response, 201, newMeal);
+    }
 
 
 }
@@ -105,7 +115,7 @@ const viewLogs = (request, response, body) => {
     if (!body.firstNameSearch || !body.lastNameSearch) {
         responseJSON.id = 'missingParams'; // error message
         return respondJSON(request, response, 400, responseJSON);
-    };
+    }
 
     let responseCode = 204; // Updated
     users[body.firstName].logs = body.logs;
