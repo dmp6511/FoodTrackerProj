@@ -9,7 +9,7 @@
     <script>
         const handleResponse = async (response) => {
 
-            content = document.querySelector("#content");
+            content = document.querySelector("#topContent");
 
             // switch statement for status codes
             switch (response.status) {
@@ -81,6 +81,7 @@
         const init = () => {
 
             const profile = document.querySelector("#profForm");
+            const mealLog = document.querySelector("#logMeal");
 
             const addProfile = (e) => {
                 e.preventDefault();
@@ -88,8 +89,17 @@
                 return false;
             };
 
-            // event listener for the form
+            // log the meal
+            const logMeal = (e) => {
+                e.preventDefault();
+                sendPost(e.target);
+                return false;
+            };
+
+            // event listener for the forms
             profile.addEventListener("submit", addProfile);
+            mealLog.addEventListener("submit", logMeal);
+
         }
 
         window.onload = init;
@@ -125,25 +135,8 @@
             </select>
 
             <input type="submit" value="Create a new Profile!" />
-            <!-- area for status code -->
-        </form>
-        <section id="content"></section>
-    </section>
-
-    <br>
-
-    <!-- searching for Logs -->
-    <section id="viewLogBtn">
-        <form action="/viewLogs" method="get">
-            <h3>Search Logs</h3>
-            <label for="personSearch">View Logs for</label>
-            <br>
-            <input type="text" name="firstNameSearch" id="firstNameSearch" placeholder="First Name">
-            <input type="text" name="lastNameSearch" id="lastNameSearch" placeholder="Last Name">
-            <input type="submit" value="Search for Logs">
         </form>
     </section>
-
 
     <!-- Logging a Meal -->
 
@@ -164,6 +157,22 @@
             <textarea name="dishDesc" id="dishDesc" cols="30" rows="5"
                 placeholder="Enter a description of your dish..."></textarea>
             <input type="submit" value="Log Meal">
+        </form>
+    </section>
+
+    <!-- area for status codes -->
+    <section id="topContent"></section>
+
+    <br>
+    <!-- searching for Logs -->
+    <section id="viewLogBtn">
+        <form action="/viewLogs" method="get">
+            <h3>Search Logs</h3>
+            <label for="personSearch">View Logs for</label>
+            <br>
+            <input type="text" name="firstNameSearch" id="firstNameSearch" placeholder="First Name">
+            <input type="text" name="lastNameSearch" id="lastNameSearch" placeholder="Last Name">
+            <input type="submit" value="Search for Logs">
         </form>
     </section>
 

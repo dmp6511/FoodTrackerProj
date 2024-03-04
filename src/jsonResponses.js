@@ -62,13 +62,13 @@ const createProfile = (request, response, body) => {
 
 
 // post a meal log
-const logMeal = (request, response) => {
+const logMeal = (request, response, body) => {
     const newMeal = {
-        date: request.body.date,
-        meal: request.body.dishName,
-        time: request.body.mealTime,
-        description: request.body.dishDesc,
-        calories: request.body.calCount,
+        date: body.date,
+        meal: body.dishName,
+        time: body.mealTime,
+        description: body.dishDesc,
+        calories: body.calCount,
         createdAt: Date.now(),
     };
 
@@ -80,13 +80,13 @@ const logMeal = (request, response) => {
         };
         return respondJSON(request, response, 400, responseJSON);
     };
-    
+
 
     // send a message
     newMeal.message = `Meal logged successfully.`;
 
     // push the meal to the user's logs
-    users[request.body.firstName].logs.push(newMeal);
+    users[body.firstName].logs.push(newMeal);
 
     // return a 201
     return respondJSON(request, response, 201, newMeal);
