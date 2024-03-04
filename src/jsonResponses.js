@@ -68,21 +68,7 @@ const logMeal = (request, response, body) => {
         message: 'User not found.',
     };
 
-    // Find the user in the users array
-    const userIndex = users.findIndex(user => user.firstName === body.firstName);
-
-    // If the user is found
-    if (userIndex !== -1) {
-        // Add the meal to the user's meals array
-        if (!users[userIndex].logs) {
-            users[userIndex].logs = [];
-        }
-        users[userIndex].logs.push(body.dishName + " " + body.mealTime + " " + body.date + " " + body.dishDesc + " " + body.calCount);
-
-        responseJSON.message = `Meal has been logged for ${body.firstName}.`;
-        return respondJSON(request, response, 200, responseJSON);
-    };
-
+    // create the meal object
     const newMeal = {
         date: body.date,
         meal: body.dishName,
@@ -101,30 +87,31 @@ const logMeal = (request, response, body) => {
         return respondJSON(request, response, 400, responseJSON);
     }
 
+    // log the meal
+    if (users[body.firstName]) {
+        users[body.firstName].logs = users[body.firstName].logs || {};
+        users[body.firstName].logs[Date.now()] = newMeal;
 
+        responseJSON.message = `Meal has been logged for ${body.firstName}.`;
+        return respondJSON(request, response, 200, responseJSON);
+    };
 }
 
 
 // view the log section of the user object
 const viewLogs = (request, response, body) => {
     const responseJSON = {
-        message: 'One or more fields are empty. Please fill out all fields.',
+        message: "user not found",
     };
 
-    // if the search fields are empty
-    if (!body.firstNameSearch || !body.lastNameSearch) {
-        responseJSON.id = 'missingParams'; // error message
-        return respondJSON(request, response, 400, responseJSON);
+    if (users[body.firstName]) {
+        responseJSON.message = `Logs for ${body.firstName}:`;
+        responseJSON.logs = users[body.firstName].logs;
+        return respondJSON(request, response, 200, responseJSON);
     }
 
-    let responseCode = 204; // Updated
-    users[body.firstName].logs = body.logs;
-
-    // show the logs
-    if (responseCode === 204) {
-        responseJSON.message = `Logs for '${users[body.firstName].firstName + " " + users[body.firstName].lastName}' have been updated successfully.`;
-        return respondJSON(request, response, responseCode, responseJSON);
-    }
+    repsponseJSON.message = "No logs found for user.";
+    return respondJSON(request, response, 200, responseJSON);
 }
 
 

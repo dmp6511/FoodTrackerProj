@@ -91,16 +91,15 @@
 
             // log the meal
             const logMeal = (e) => {
-                e.preventDefault();
-                sendPost(e.target);
-                return false;
+               // e.preventDefault();
+                //sendPost(e.target);
+                console.log("meal logged");
             };
 
             // event listener for the forms
             profile.addEventListener("submit", addProfile);
             mealLog.addEventListener("submit", logMeal);
-
-        }
+        };
 
         window.onload = init;
     </script>
