@@ -94,7 +94,7 @@ const logMeal = (request, response, body) => {
 
         responseJSON.message = `Meal has been logged for ${body.firstName}.`;
         return respondJSON(request, response, 200, responseJSON);
-    };
+    }
 }
 
 
@@ -110,7 +110,7 @@ const viewLogs = (request, response, body) => {
         return respondJSON(request, response, 200, responseJSON);
     }
 
-    repsponseJSON.message = "No logs found for user.";
+    responseJSON.message = "No logs found for user.";
     return respondJSON(request, response, 200, responseJSON);
 }
 
