@@ -41,7 +41,7 @@ const createProfile = (request, response, body) => {
     if (!users[body.firstName]) {
         users[body.firstName] = {};
         responseCode = 201; // Created
-    };
+    }
 
     // applying the user's data
     users[body.firstName].firstName = body.firstName;
@@ -61,15 +61,61 @@ const createProfile = (request, response, body) => {
 };
 
 
-
-// view logs
-const viewLogs = (request, response) => {
-    const responseJSON = {
-        message: 'No logs found... for now.',
+// post a meal log
+const logMeal = (request, response) => {
+    const newMeal = {
+        date: request.body.date,
+        meal: request.body.dishName,
+        time: request.body.mealTime,
+        description: request.body.dishDesc,
+        calories: request.body.calCount,
+        createdAt: Date.now(),
     };
 
-    return respondJSON(request, response, 200, responseJSON);
-};
+    // if the fields are empty
+    if (!newMeal.date || !newMeal.meal || !newMeal.time || !newMeal.description || !newMeal.calories) {
+        const responseJSON = {
+            message: 'One or more fields are empty. Please fill out all fields.',
+            id: 'missingParams',
+        };
+        return respondJSON(request, response, 400, responseJSON);
+    };
+    
+
+    // send a message
+    newMeal.message = `Meal logged successfully.`;
+
+    // push the meal to the user's logs
+    users[request.body.firstName].logs.push(newMeal);
+
+    // return a 201
+    return respondJSON(request, response, 201, newMeal);
+
+
+}
+
+
+// view the log section of the user object
+const viewLogs = (request, response, body) => {
+    const responseJSON = {
+        message: 'One or more fields are empty. Please fill out all fields.',
+    };
+
+    // if the search fields are empty
+    if (!body.firstNameSearch || !body.lastNameSearch) {
+        responseJSON.id = 'missingParams'; // error message
+        return respondJSON(request, response, 400, responseJSON);
+    };
+
+    let responseCode = 204; // Updated
+    users[body.firstName].logs = body.logs;
+
+    // show the logs
+    if (responseCode === 204) {
+        responseJSON.message = `Logs for '${users[body.firstName].firstName + " " + users[body.firstName].lastName}' have been updated successfully.`;
+        return respondJSON(request, response, responseCode, responseJSON);
+    }
+}
 
 
 // not found
@@ -89,4 +135,5 @@ module.exports = {
     createProfile,
     notFound,
     viewLogs,
+    logMeal,
 };
